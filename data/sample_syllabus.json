@@ -1,0 +1,47 @@
+{
+  "semester": {
+    "start_date": "2026-01-15",
+    "end_date": "2026-06-15",
+    "rest_days": ["Sunday"]
+  },
+  "subjects": [
+    {
+      "code": "CEUC202",
+      "name": "Computer Organisation and Architecture",
+      "credits": 3,
+      "exam_weightage": {
+        "mid": 0,
+        "end": 0
+      },
+      "units": [
+        {
+          "unit_no": 1,
+          "title": "REGISTER TRANSFER AND MICROOPERATIONS BASIC COMPUTER ORGANIZATION AND DESIGN",
+          "importance": "LESS_IMP",
+          "minimum_hours": 13,
+          "topics": [
+            {
+              "topic": "Register Transfer Language",
+              "subtopics": [
+                "R1",
+                "R2",
+                "R3"
+              ]
+            },
+            {
+              "topic": "Register Transfer",
+              "subtopics": [
+                "RT1",
+                "RT2",
+                "RT3"
+              ]
+            }
+          ],
+          "self_study": [
+            "Digital Electronics"
+          ]
+        }
+      ]
+    }
+  ]
+}
