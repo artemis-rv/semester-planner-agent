@@ -29,3 +29,22 @@ def load_subjects(path: str):
             exam_weightage=s["exam_weightage"],
             units=units
         ))
+
+        return subjects
+    
+
+if __name__ == "__main__":
+    subjects = load_subjects("data/sample_syllabus.json")
+
+    engine = PlannerEngine(subjects)
+    rows = engine.generate_plan()
+
+    writer = ExcelWriter()
+
+    for subject in set(r["subject"] for r in rows):
+        writer.write_subject_sheet(
+            subject,
+            [r for r in rows if r["subject"] == subject]
+        )
+
+    writer.save("output/semester_plan.xlsx")
