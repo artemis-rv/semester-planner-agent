@@ -6,6 +6,8 @@
 from openpyxl import Workbook
 from openpyxl.styles import Font, Border, Side
 
+import socket
+
 class ExcelWriter:
 
     def __init__(self):
@@ -82,6 +84,11 @@ class ExcelWriter:
                 # for cell in row:
 
     def save(self, path: str):
+        props = self.wb.properties
+        props.creator = socket.gethostname()
+        props.lastModifiedBy = socket.gethostname()
+        props.title = "Semester Study Planner"
+        props.description = "Auto-generated semester planner using Python"
         if "Sheet" in self.wb.sheetnames:
             del self.wb["Sheet"]
         self.wb.save(path)
