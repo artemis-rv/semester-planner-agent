@@ -25,8 +25,8 @@ class ExcelWriter:
             ws.append([
                 row["unit"],
                 row["importance"],
+                row["unit_title"],
                 row["topic"],
-                row["subtopics"],
                 row["minimum_hours"] or ""
             ])
 
