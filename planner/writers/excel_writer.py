@@ -31,31 +31,39 @@ class ExcelWriter:
         #         row["minimum_hours"] or ""
         #     ])
 
-        flag=0
+        self_study_written = set()
+
         for row in rows:
-            
-            if row["topic"]=="SELF STUDY" and flag==0:
-                ws.append(["","","",row["topic"],""])
-                flag+=1
-            
-            if row["topic"]=="SELF STUDY":
-                ws.append([
-                    row["unit"],
-                    row["importance"],
-                    row["unit_title"],
-                    # row["topic"],
-                    row["subtopics"] if flag==1 else row["topic"],
-                    row["minimum_hours"] or ""
-                ])
-            if row["topic"]!="SELF STUDY":
+            unit = row["unit"]
+
+            # NORMAL TOPICS
+            if not row["self_study"]:
                 ws.append([
                     row["unit"],
                     row["importance"],
                     row["unit_title"],
                     row["topic"],
-                    # row["subtopics"] if row["topic"]=="SELF STUDY" else "",
                     row["minimum_hours"] or ""
                 ])
+                continue
+
+            # SELF STUDY HEADER (once per unit)
+            if row["topic"] == "SELF STUDY" and unit not in self_study_written:
+                ws.append([
+                    "", "", "",
+                    "SELF STUDY",
+                    ""
+                ])
+                self_study_written.add(unit)
+                # continue
+
+            # SELF STUDY ITEMS (below header, Topic column only)
+            ws.append([
+                "", "", "",
+                row["subtopics"],
+                ""
+            ])
+
 
         self._apply_unit_separators(ws)
 
