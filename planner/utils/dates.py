@@ -25,3 +25,29 @@ def daterange(start: date, end: date):
         current+=timedelta(days=1)              #increments 1 calender day
 
 
+def generate_study_days(start: date, end: date, rest_days: list[str]):
+    rest_days=set(rest_days)                            #constant lookup time
+    study_days=[]
+
+    for d in daterange(start,end):
+        if d.strftime("%A") not in rest_days:               #converts date into corresponding days
+            study_days.append(d)
+
+    return study_days
+
+
+def group_days_by_week(study_days: list[date]):
+    """
+    Groups dates into week numbers starting from week 1.
+    Week 1 = first study week of semester.
+    """
+
+    weeks=defaultdict(list)
+    week_no=1
+
+    for d in study_days:
+        if weeks[week_no] and d.weekday() == 0:
+            week_no += 1
+        weeks[week_no].append(d)
+
+    return dict(weeks)

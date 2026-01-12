@@ -21,6 +21,7 @@ def load_subjects(path: str):
     with open(path) as f:
         raw=json.load(f)
 
+    semester_config=raw["semester"]
     subjects=[]
 
     for s in raw["subjects"]:
@@ -44,21 +45,25 @@ def load_subjects(path: str):
             units=units
         ))
 
-        return subjects
+        return subjects,semester_config
     
 
 if __name__ == "__main__":
-    subjects = load_subjects("data/sample_syllabus.json")
+    subjects,semester_config = load_subjects("data/sample_syllabus.json")
+    
 
-    engine = PlannerEngine(subjects)
-    rows = engine.generate_plan()
+    engine = PlannerEngine(subjects, semester_config)
+    # rows = engine.generate_plan()
+    rows = engine.generate_plan_with_time()
+    print(rows)
 
-    writer = ExcelWriter()
 
-    for subject in set(r["subject"] for r in rows):
-        writer.write_subject_sheet(
-            subject,
-            [r for r in rows if r["subject"] == subject]
-        )
+    # writer = ExcelWriter()
 
-    writer.save("output/semester_plan.xlsx")
+    # for subject in set(r["subject"] for r in rows):
+    #     writer.write_subject_sheet(
+    #         subject,
+    #         [r for r in rows if r["subject"] == subject]
+    #     )
+
+    # writer.save("output/semester_plan.xlsx")
