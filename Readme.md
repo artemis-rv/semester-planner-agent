@@ -59,7 +59,7 @@ Focus:
 semester-planner-agent/
 │
 ├── README.md
-├── pyproject.toml / requirements.txt
+├── requirements.txt
 ├── .gitignore
 │
 ├── config/
