@@ -30,27 +30,26 @@ The project follows production-style software engineering practices and is built
 
 ---
 
+## Completed Phases
+
+### Phase 1 – Core Planner Engine
+- Designed structured syllabus data models
+- Implemented planner engine with clean separation of concerns
+- Generated multi-sheet Excel planners
+- Implemented self-study section rendering
+- Followed SOLID principles in code organization
+
+---
+
 ## Current Phase
 
-**Phase 1 – Core Planner Engine**
+**Phase 2A – Time-Aware Planning Logic (In Progress)**
 
-Implemented:
-
-* Structured syllabus data model
-* Planner engine that converts syllabus data into planning rows
-* Excel writer that generates:
-
-  * One sheet per subject
-  * Topic-level rows
-  * Self-study rows
-  * Basic formatting
-
-Not yet implemented:
-
-* OCR
-* AI/LLM extraction
-* Date-based scheduling
-* UI
+Focus:
+- Semester date handling
+- Rest day exclusion
+- Week-based topic allocation
+- Soft workload estimation
 
 ---
 
@@ -93,9 +92,11 @@ semester-planner-agent/
 ## How It Works (Current)
 
 1. Academic syllabus data is provided in structured JSON format
-2. The planner engine converts syllabus hierarchy into planning rows
-3. The Excel writer generates formatted `.xlsx` files
-4. Each subject is written to a separate sheet
+2. Semester configuration (start date, end date, rest days) is loaded
+3. The planner engine converts syllabus hierarchy into time-aware planning rows
+4. Topics are distributed across semester weeks with soft hour estimation
+5. The Excel writer generates formatted `.xlsx` files
+6. Each subject is written to a separate sheet
 
 ---
 
@@ -133,12 +134,19 @@ Output:
 
 ---
 
+## In Progress
+
+- Date-based semester planning
+- Rest day handling
+- Weekly workload estimation
+
+---
+
 ## Planned Features (Upcoming Phases)
 
 * OCR support for images and scanned PDFs
 * LLM-based structured syllabus extraction
 * Interactive clarification questions
-* Date-based scheduling with rest days
 * Planner versioning and regeneration
 * Local web-based UI
 
