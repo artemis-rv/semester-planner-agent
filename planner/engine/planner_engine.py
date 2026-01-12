@@ -1,3 +1,16 @@
+"""
+Core planning logic.
+
+Responsibilities:
+- Convert syllabus data into planning rows
+- Apply scheduling logic (weeks, dates)
+- Estimate workload per topic
+- Remain independent of Excel or UI
+
+This is the brain of the planner.
+If planning behavior is wrong, debug here first.
+"""
+
 from planner.models.syllabus import Subject
 
 

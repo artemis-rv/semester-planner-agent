@@ -1,7 +1,16 @@
-# key responsibilities:
-# One master sheet
-# One sheet per subject
-# Merged cells for units
+"""
+Excel output generation.
+
+Responsibilities:
+- Create workbooks and worksheets
+- Apply formatting and styling
+- Render planning rows into Excel layout
+- Handle metadata and presentation details
+
+No planning or date logic should live here.
+If Excel looks wrong but logic is right, debug here.
+"""
+
 
 from openpyxl import Workbook
 from openpyxl.styles import Font, Border, Side

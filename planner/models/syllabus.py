@@ -1,3 +1,19 @@
+"""
+Data models for syllabus structure.
+
+Defines:
+- Subject
+- Unit
+- Topic
+
+Responsibilities:
+- Represent academic hierarchy
+- Hold raw, structured data
+- No logic, no computation, no formatting
+
+If you need to change data shape, edit this file.
+"""
+
 from dataclasses import dataclass
 from typing import List, Optional
 

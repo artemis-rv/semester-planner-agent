@@ -1,3 +1,17 @@
+"""
+Entry point of the application.
+
+Responsibilities:
+- Load structured syllabus data
+- Load semester configuration
+- Initialize PlannerEngine
+- Trigger plan generation
+- Pass output to ExcelWriter
+
+This file orchestrates the flow.
+No business logic should live here.
+"""
+
 import json
 from planner.models.syllabus import Subject, Unit, Topic
 from planner.engine.planner_engine import PlannerEngine
