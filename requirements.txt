@@ -1,1 +1,11 @@
 openpyxl>=3.1.2
+pytesseract
+pdf2image
+pymupdf
+python-docx
+google-generativeai
+python-dotenv
+pydantic
+fastapi
+uvicorn
+python-multipart

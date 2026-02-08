@@ -40,3 +40,4 @@ class Subject:
     credits: int
     exam_weightage: dict
     units: List[Unit]
+    difficulty_multiplier: float = 1.0

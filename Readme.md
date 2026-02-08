@@ -1,157 +1,80 @@
-# Semester Planner Agent
+# Semester Planner AI 🎓
 
-## Overview
+An intelligent study planner that converts your raw syllabus files (PDF, Image, DOCX) into a perfectly structured study schedule using OCR and Gemini AI.
 
-Semester Planner Agent is a local automation system that converts academic syllabi into structured, multi-sheet Excel planners.
+## Features 🚀
 
-The system is designed to handle real-world syllabus complexity, including:
+-   **Multi-Format Ingestion**: Upload PDFs (scanned or text-based), Word docs, or images.
+-   **AI-Powered Parsing**: Automatically extracts subjects, units, topics, and exam weightage using Gemini 1.5.
+-   **Intelligent Validation**: Detects missing info and asks you clarifying questions via an interactive dialogue loop.
+-   **Exam-Aware Scheduling**: Weight-based allocation that prioritizes important units and front-loads midterm topics.
+-   **Revision Cycles**: Configurable buffers for final revisions.
+-   **Output Versioning**: Keep track of every iteration in `output/v1`, `v2`, etc.
+-   **Modern Web UI**: A beautiful, dark-themed browser interface built with Vite, React, and Tailwind CSS.
 
-* Units, topics, and sub-topics
-* Importance levels (IMP / LESS_IMP)
-* Self-study sections
-* Minimum recommended hours
-* Multiple subjects per semester
-* Planner regeneration with versioning (later phases)
+## Architecture 🏗️
 
-The project follows production-style software engineering practices and is built incrementally with clear separation of concerns.
-
----
-
-## Project Goals
-
-* Transform unstructured or semi-structured academic syllabi into usable study planners
-* Support image-based and scanned documents (OCR in later phases)
-* Generate clean, readable Excel planners with:
-
-  * Multiple sheets per subject
-  * A master overview sheet
-  * Merged cells and visual separators
-* Apply SOLID principles and maintainable architecture
-
----
-
-## Completed Phases
-
-### Phase 1 – Core Planner Engine
-- Designed structured syllabus data models
-- Implemented planner engine with clean separation of concerns
-- Generated multi-sheet Excel planners
-- Implemented self-study section rendering
-- Followed SOLID principles in code organization
-
----
-
-## Current Phase
-
-**Phase 2A – Time-Aware Planning Logic (In Progress)**
-
-Focus:
-- Semester date handling
-- Rest day exclusion
-- Week-based topic allocation
-- Soft workload estimation
-
----
-
-## Repository Structure
-
-```
-semester-planner-agent/
-│
-├── README.md
-├── requirements.txt
-├── .gitignore
-│
-├── config/
-│   └── planner_config.yaml
-│
-├── data/
-│   └── sample_syllabus.json
-│
-├── planner/
-│   ├── models/
-│   │   └── syllabus.py
-│   │
-│   ├── engine/
-│   │   └── planner_engine.py
-│   │
-│   ├── writers/
-│   │   └── excel_writer.py
-│   │
-│   └── utils/
-│       └── dates.py
-│
-├── output/
-│   └── semester_plan.xlsx
-│
-└── main.py
+```mermaid
+graph TD
+    A[Syllabus File] --> B[OCR Engine]
+    B --> C[Text Cleaner]
+    C --> D[AI Extractor]
+    D --> E[Syllabus Validator]
+    E --> F[Dialogue Agent]
+    F --> G[Planner Engine]
+    G --> H[Excel Writer]
+    H --> I[output/vN/semester_plan.xlsx]
 ```
 
----
+## Setup & Installation 🛠️
 
-## How It Works (Current)
+### 1. Prerequisites
+- **Python 3.10+**
+- **Node.js 18+** (for Web UI)
+- **Tesseract OCR**: [Install Tesseract](https://github.com/UB-Mannheim/tesseract/wiki) and ensure it's in your system PATH.
+- **Poppler**: Required for PDF processing.
 
-1. Academic syllabus data is provided in structured JSON format
-2. Semester configuration (start date, end date, rest days) is loaded
-3. The planner engine converts syllabus hierarchy into time-aware planning rows
-4. Topics are distributed across semester weeks with soft hour estimation
-5. The Excel writer generates formatted `.xlsx` files
-6. Each subject is written to a separate sheet
-
----
-
-## Requirements
-
-* Python 3.10+
-* openpyxl
-
-Install dependencies:
-
+### 2. Environment Configuration
+Create a `.env` file in the root directory:
+```bash
+GEMINI_API_KEY=your_google_ai_key_here
 ```
+
+### 3. Backend Dependencies
+```bash
 pip install -r requirements.txt
 ```
 
----
-
-## Running the Project
-
-```
-python main.py
+### 4. Frontend Dependencies
+```bash
+cd web_ui
+npm install
 ```
 
-Output:
+## Usage 📖
 
-* `output/semester_plan.xlsx`
+### Option A: Local Web UI (Recommended)
+1. Start the API: `python web_api.py`
+2. Start the UI: `cd web_ui && npm run dev`
+3. Open `http://localhost:5173` in your browser.
 
----
+### Option B: CLI Run
+```bash
+python main.py path/to/your/syllabus.pdf
+```
 
-## Design Principles
+## Project Structure 📂
 
-* Separation of concerns
-* No business logic inside Excel writer
-* Data models independent of file formats
-* Extensible architecture for OCR and AI layers
-
----
-
-## In Progress
-
-- Date-based semester planning
-- Rest day handling
-- Weekly workload estimation
-
----
-
-## Planned Features (Upcoming Phases)
-
-* OCR support for images and scanned PDFs
-* LLM-based structured syllabus extraction
-* Interactive clarification questions
-* Planner versioning and regeneration
-* Local web-based UI
+- `planner/`: Core logic
+    - `ingestion/`: OCR and text cleaning
+    - `ai/`: Extraction and validation
+    - `agent/`: Dialogue loop
+    - `engine/`: Scheduling logic
+    - `utils/`: Logging and date helpers
+- `web_ui/`: React frontend
+- `web_api.py`: FastAPI backend
+- `main.py`: CLI entry point
+- `output/`: Generated Excel plans (versioned)
 
 ---
-
-## License
-
-This project is intended for personal and educational use.
+Developed with ❤️ for students.
